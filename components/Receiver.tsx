@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Card, List } from 'antd';
+import { useMQTT } from '../context/mqtt';
 
 const Receiver = ({ payload }: any) => {
   const [messages, setMessages] = useState([]);
+  const { setTemp } = useMQTT();
 
   useEffect(() => {
     if (payload.topic) {
+      console.log(payload.message);
+      setTemp(parseFloat(payload.message));
       setMessages((messages) => [...messages, payload]);
     }
   }, [payload]);
@@ -18,12 +22,12 @@ const Receiver = ({ payload }: any) => {
 
   return (
     <Card title='Receiver'>
-      <List
+      {/* <List
         size='small'
         bordered
         dataSource={messages}
         renderItem={renderListItem}
-      />
+      /> */}
     </Card>
   );
 };

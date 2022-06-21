@@ -4,12 +4,15 @@ import Image from 'next/image';
 import HookMqtt from '../components';
 import styles from '../styles/Home.module.css';
 import Gaguge from '../components/Gaguge';
+import { useMQTT } from '../context/mqtt';
 
 const Home: NextPage = () => {
+  const { temperature } = useMQTT();
+  console.log(temperature);
   return (
     <div className={styles.container}>
       <HookMqtt />
-      <Gaguge value={23} />
+      <Gaguge value={temperature} />
     </div>
   );
 };
