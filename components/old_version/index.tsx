@@ -3,7 +3,7 @@ import Connection from './Connection';
 import Publisher from './Publisher';
 import Subscriber from './Subscriber';
 import Receiver from './Receiver';
-import mqtt from 'mqtt';
+import mqtt, { IClientOptions, MqttClient } from 'mqtt';
 
 export const QosOption = createContext([]);
 const qosOption = [
@@ -21,13 +21,17 @@ const qosOption = [
   },
 ];
 
+
+
+
+
 const HookMqtt = () => {
-  const [client, setClient] = useState(null);
+  const [client, setClient] = useState<MqttClient | null>(null);
   const [isSubed, setIsSub] = useState(false);
   const [payload, setPayload] = useState({});
   const [connectStatus, setConnectStatus] = useState('Connect');
 
-  const mqttConnect = (host, mqttOption) => {
+  const mqttConnect = (host: string, mqttOption: IClientOptions) => {
     setConnectStatus('Connecting');
     setClient(mqtt.connect(host, mqttOption));
   };
@@ -53,7 +57,7 @@ const HookMqtt = () => {
 
   const mqttDisconnect = () => {
     if (client) {
-      client.end(() => {
+      client.on('end', () => {
         setConnectStatus('Connect');
       });
     }
@@ -105,7 +109,7 @@ const HookMqtt = () => {
       />
       <QosOption.Provider value={qosOption}>
         <Subscriber sub={mqttSub} unSub={mqttUnSub} showUnsub={isSubed} />
-        <Publisher publish={mqttPublish} />
+        {/* <Publisher publish={mqttPublish} /> */}
       </QosOption.Provider>
       <Receiver payload={payload} />
     </>

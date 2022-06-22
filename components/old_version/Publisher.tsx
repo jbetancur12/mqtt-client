@@ -7,7 +7,7 @@ const Publisher = ({ publish }: any) => {
   const qosOptions = useContext(QosOption);
 
   const record = {
-    topic: 'testtopic/react',
+    topic: 'topic_sensor_temperature',
     qos: 0,
   };
 

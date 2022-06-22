@@ -3,15 +3,20 @@ import { useGauge } from 'use-gauge';
 
 interface ArcedProps {
   value: number;
+  domain: [number, number]
+  ranges: {
+    low: number,
+    high: number
+  }
 }
 
 const START_ANGLE = 45;
 const END_ANGLE = 315;
 
 function Arced(props: ArcedProps) {
-  const { value } = props;
+  const { value, domain, ranges } = props;
   const gauge = useGauge({
-    domain: [0, 100],
+    domain: domain,
     startAngle: START_ANGLE,
     endAngle: END_ANGLE,
     numTicks: 21,
@@ -24,8 +29,20 @@ function Arced(props: ArcedProps) {
     tipRadius: 2,
   });
 
+  const classColor = () => {
+    if (value < ranges.low) {
+      return 'stroke-blue-400'
+    } else if (value > ranges.high) {
+      return 'stroke-orange-400'
+    } else {
+      return 'stroke-green-400'
+    }
+
+  }
+
+
   return (
-    <div className='p-4'>
+    <div className='p-10'>
       <svg className='w-full overflow-visible p-2' {...gauge.getSVGProps()}>
         <g id='arcs'>
           <path
@@ -37,7 +54,7 @@ function Arced(props: ArcedProps) {
             fill='none'
             className='stroke-gray-200'
             strokeLinecap='round'
-            strokeWidth={24}
+            strokeWidth={4}
           />
           <path
             {...gauge.getArcProps({
@@ -46,7 +63,7 @@ function Arced(props: ArcedProps) {
               endAngle: gauge.valueToAngle(value),
             })}
             fill='none'
-            className='stroke-green-400'
+            className={classColor()}
             strokeLinecap='round'
             strokeWidth={24}
           />

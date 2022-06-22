@@ -8,7 +8,7 @@ const Receiver = ({ payload }: any) => {
 
   useEffect(() => {
     if (payload.topic) {
-      console.log(payload.message);
+
       setTemp(parseFloat(payload.message));
       setMessages((messages) => [...messages, payload]);
     }
