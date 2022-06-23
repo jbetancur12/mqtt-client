@@ -1,18 +1,18 @@
-import React from 'react';
-import { Card, Button, Form, Input, Row, Col } from 'antd';
+import React from 'react'
+import { Card, Button, Form, Input, Row, Col } from 'antd'
 
 const Connection = ({ connect, disconnect, connectBtn }: any) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm()
   const record = {
     host: 'rf09deee.us-east-1.emqx.cloud',
     clientId: `mqttjs_ + ${Math.random().toString(16).substr(2, 8)}`,
     port: 8083,
     username: 'jbetancur12',
     password: 'jorge900'
-  };
+  }
   const onFinish = (values: any) => {
-    const { host, clientId, port, username, password } = values;
-    const url = `ws://${host}:${port}/mqtt`;
+    const { host, clientId, port, username, password } = values
+    const url = `ws://${host}:${port}/mqtt`
     const options = {
       keepalive: 30,
       protocolId: 'MQTT',
@@ -24,77 +24,75 @@ const Connection = ({ connect, disconnect, connectBtn }: any) => {
         topic: 'WillMsg',
         payload: 'Connection Closed abnormally..!',
         qos: 0,
-        retain: false,
+        retain: false
       },
-      rejectUnauthorized: false,
-    };
-    options.clientId = clientId;
-    options.username = username;
-    options.password = password;
-    connect(url, options);
-  };
+      rejectUnauthorized: false
+    }
+    options.clientId = clientId
+    options.username = username
+    options.password = password
+    connect(url, options)
+  }
 
   const handleConnect = () => {
-    form.submit();
-  };
+    form.submit()
+  }
 
   const handleDisconnect = () => {
-    disconnect();
-  };
+    disconnect()
+  }
 
   const ConnectionForm = (
     <Form
-      layout='vertical'
-      name='basic'
+      layout="vertical"
+      name="basic"
       form={form}
       initialValues={record}
-      onFinish={onFinish}
-    >
+      onFinish={onFinish}>
       <Row gutter={20}>
         <Col span={8}>
-          <Form.Item label='Host' name='host'>
+          <Form.Item label="Host" name="host">
             <Input />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label='Port' name='port'>
+          <Form.Item label="Port" name="port">
             <Input />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label='Client ID' name='clientId'>
+          <Form.Item label="Client ID" name="clientId">
             <Input />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label='Username' name='username'>
+          <Form.Item label="Username" name="username">
             <Input />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item label='Password' name='password'>
+          <Form.Item label="Password" name="password">
             <Input />
           </Form.Item>
         </Col>
       </Row>
     </Form>
-  );
+  )
 
   return (
     <Card
-      title='Connection'
+      title="Connection"
       actions={[
-        <Button type='primary' onClick={handleConnect}>
+        <Button type="primary" onClick={handleConnect}>
           {connectBtn}
         </Button>,
         <Button danger onClick={handleDisconnect}>
           Disconnect
-        </Button>,
-      ]}
-    >
+        </Button>
+      ]}>
       {ConnectionForm}
     </Card>
-  );
-};
+  )
+}
 
-export default Connection;
+export default Connection

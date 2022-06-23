@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Card, List } from 'antd';
-import { useMQTT } from '../context/mqtt';
+import React, { useEffect, useState } from 'react'
+import { Card, List } from 'antd'
+import { useMQTT } from '../context/mqtt'
 
 const Receiver = ({ payload }: any) => {
-  const [messages, setMessages] = useState([]);
-  const { setTemp } = useMQTT();
+  const [messages, setMessages] = useState([])
+  const { setTemp } = useMQTT()
 
   useEffect(() => {
     if (payload.topic) {
-
-      setTemp(parseFloat(payload.message));
-      setMessages((messages) => [...messages, payload]);
+      setTemp(parseFloat(payload.message))
+      setMessages((messages) => [...messages, payload])
     }
-  }, [payload]);
+  }, [payload])
 
   const renderListItem = (item: any) => (
     <List.Item>
       <List.Item.Meta title={item.topic} description={item.message} />
     </List.Item>
-  );
+  )
 
   return (
-    <Card title='Receiver'>
+    <Card title="Receiver">
       {/* <List
         size='small'
         bordered
@@ -29,7 +28,7 @@ const Receiver = ({ payload }: any) => {
         renderItem={renderListItem}
       /> */}
     </Card>
-  );
-};
+  )
+}
 
-export default Receiver;
+export default Receiver
