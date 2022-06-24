@@ -22,8 +22,12 @@ const Status = () => {
 
   const [isCustom, setIsCustom] = useState(false)
   const [modalState, setModalState] = useState(false)
-  const [ranges, setRanges] = useState({ Tmax: 22, Tmin: 20, Hmax: 60, Hmin: 40 })
-
+  const [ranges, setRanges] = useState({
+    Tmax: 22,
+    Tmin: 20,
+    Hmax: 60,
+    Hmin: 40
+  })
 
   const [startDate, setStartDate] = useState<Date>(dt)
   const [endDate, setEndDate] = useState<Date>(new Date())
@@ -53,9 +57,9 @@ const Status = () => {
     }
   }, [message])
 
-
   const toggleModal = () => setModalState(!modalState)
-  const onChangeHandler = (e) => setRanges({ ...ranges, [e.target.name]: e.target.value })
+  const onChangeHandler = (e) =>
+    setRanges({ ...ranges, [e.target.name]: e.target.value })
 
   return (
     <div className="container is-fluid section">
@@ -77,9 +81,11 @@ const Status = () => {
                     dateFormat="Pp"
                     placeholderText="Start date"
                     className="input"
-                    id='from'
+                    id="from"
                   />
-                  <label htmlFor="since" className='mt-3'>Since:</label>
+                  <label htmlFor="since" className="mt-3">
+                    Since:
+                  </label>
                   <ReactDatePicker
                     selected={endDate}
                     onChange={(date: Date) => setEndDate(date)}
@@ -88,30 +94,42 @@ const Status = () => {
                     dateFormat="Pp"
                     placeholderText="End date"
                     className="input"
-                    id='since'
+                    id="since"
                   />
                 </>
               )}
             </div>
           </div>
           <div className="box">
-            <span className='has-text-centered'>Temperature:</span>
-            <span onClick={toggleModal} className={classNames("input  is-rounded", { "has-text-warning": temperature > ranges.Tmax })}>{`${temperature} C°`}</span>
+            <span className="has-text-centered">Temperature:</span>
+            <span
+              onClick={toggleModal}
+              className={classNames('input  is-rounded', {
+                'has-text-warning': temperature > ranges.Tmax
+              })}>
+              {`${temperature} C°`}
+            </span>
             Humidity:
-            <span className={classNames("input  is-rounded", { "has-text-warning": humidity > ranges.Hmax })}>{`${humidity} %`}</span>
+            <span
+              className={classNames('input  is-rounded', {
+                'has-text-warning': humidity > ranges.Hmax
+              })}>{`${humidity} %`}</span>
           </div>
         </div>
       </div>
-      <Modal
-        closeModal={toggleModal}
-        modalState={modalState}
-        title='settings'>
+      <Modal closeModal={toggleModal} modalState={modalState} title="settings">
         MaxTemperature:
-        <input type="text" className='input' name='Tmax' value={ranges.Tmax} onChange={onChangeHandler} />
+        <input
+          type="text"
+          className="input"
+          name="Tmax"
+          value={ranges.Tmax}
+          onChange={onChangeHandler}
+        />
         MinTemperature:
-        <input type="text" className='input' />
+        <input type="text" className="input" />
       </Modal>
-    </div >
+    </div>
   )
 }
 

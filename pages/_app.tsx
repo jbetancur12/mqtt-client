@@ -3,7 +3,6 @@ import 'antd/dist/antd.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { MQTTProvider } from '../context/mqtt'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-datepicker/dist/react-datepicker.css'
 import '../styles/index.scss'
 

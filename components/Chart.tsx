@@ -43,8 +43,8 @@ const Chart = ({ data }: Props) => {
         <CartesianGrid stroke="#ccc" />
         <Legend />
         <XAxis dataKey="createat" hide />
-        <YAxis yAxisId="left" unit='C°' />
-        <YAxis yAxisId="right" orientation="right" unit='%' />
+        <YAxis yAxisId="left" unit="C°" />
+        <YAxis yAxisId="right" orientation="right" unit="%" />
         <Tooltip />
       </LineChart>
     </ResponsiveContainer>
