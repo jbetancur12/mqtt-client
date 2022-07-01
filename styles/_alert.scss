@@ -1,0 +1,119 @@
+/* The alert message box */
+.alert {
+  position: fixed;
+  padding: 0.5rem 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 80%;
+  font-size: 14px;
+  margin-top: 1rem;
+}
+.error {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  &-message {
+    color: #cc0033;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 5px 0 0;
+  }
+}
+
+.success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.warning {
+  color: #664d03;
+  background-color: #fff3cd;
+  border-color: #ffecb5;
+}
+.primary {
+  color: #084298;
+  background-color: #cfe2ff;
+  border-color: #b6d4fe;
+}
+
+.secondary {
+  color: #41464b;
+  background-color: #e2e3e5;
+  border-color: #d3d6d8;
+}
+
+.info {
+  color: #055160;
+  background-color: #cff4fc;
+  border-color: #b6effb;
+}
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+.hide {
+  display: none;
+  &.active {
+    animation: scale-display 0.3s;
+    display: inline-flex;
+  }
+
+  &.out {
+    animation: scale-display--reversed 0.3s;
+    animation-fill-mode: forwards;
+    display: inline-flex;
+  }
+}
+
+@keyframes scale-display {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes scale-display--reversed {
+  0% {
+    display: inline-flex;
+    opacity: 1;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+  99% {
+    display: inline-flex;
+    opacity: 0;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  100% {
+    display: none;
+    opacity: 0;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+}
