@@ -41,9 +41,9 @@ const Status = () => {
     .toISOString()
     .split('.')[0]
     .replace('T', ' ')}&endDate=${endDate
-    .toISOString()
-    .split('.')[0]
-    .replace('T', ' ')}`
+      .toISOString()
+      .split('.')[0]
+      .replace('T', ' ')}`
 
   const { data, error } = useFetch<Sensor[]>(url)
 
@@ -132,5 +132,7 @@ const Status = () => {
     </div>
   )
 }
+
+
 
 export default Status

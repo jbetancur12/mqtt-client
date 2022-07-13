@@ -4,7 +4,15 @@ import { Connector } from 'mqtt-react-hooks'
 import { IClientOptions } from 'mqtt'
 import Status from '../components/Status'
 
-const Home: NextPage = () => {
+type CustomPage = NextPage & {
+  requiresAuth?: boolean;
+  redirectUnauthenticatedTo?: string;
+};
+
+
+
+
+const Home: CustomPage = (): JSX.Element => {
   const options: IClientOptions = {
     keepalive: 30,
     protocolId: 'MQTT',
@@ -34,5 +42,8 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
+Home.requiresAuth = true;
+Home.redirectUnauthenticated = "/login";
 
 export default Home

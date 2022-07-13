@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useAuth } from '@context/auth';
 
 // import { userService } from 'services';
 
@@ -10,16 +11,18 @@ type Props = {
 };
 
 function Layout({ children }: Props) {
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   // redirect to home if already logged in
-  //   if (userService.userValue) {
-  //     router.push('/');
-  //   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated])
+
 
   return (
     <section className="hero is-primary is-fullheight">

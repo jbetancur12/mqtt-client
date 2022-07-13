@@ -1,11 +1,10 @@
-import useAxios from 'axios-hooks'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import Alert from '../components/Alert/Alert'
-import useFetch from '../hooks/useFetch'
-import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { Layout } from '../components/account/Layout'
+import NotificationContext from '../context/notificationContext'
+import { useAuth } from '@context/auth';
 
 interface Inputs {
   firstName: string
@@ -18,7 +17,8 @@ interface Inputs {
 }
 
 const Register = (): JSX.Element => {
-  const router = useRouter()
+  const auth = useAuth();
+  const notificationCtx = useContext(NotificationContext);
 
   const {
     register,
@@ -27,21 +27,13 @@ const Register = (): JSX.Element => {
     formState: { errors }
   } = useForm<Inputs>()
 
-  const [
-    /* eslint no-empty-pattern: "error" */
-    { data },
-    executePost
-  ] = useAxios(
-    {
-      url: 'http://192.168.0.6:3000/api/auth/register',
-      method: 'POST'
-    },
-    { manual: true }
-  )
+
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    return executePost({ data }).then(() => {
-      router.push('login')
+    auth.registerUser(data).then(() => {
+      notificationCtx.success('Registro Exitoso!', 3)
+    }).catch((error: Error) => {
+      notificationCtx.success(error.message, 3)
     })
   }
 
